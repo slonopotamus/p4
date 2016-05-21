@@ -1,0 +1,17 @@
+SubDir P4 zlib ;
+
+P4Library $(SUPPORTLIB) : 
+	adler32.c
+	crc32.c
+	deflate.c
+	gzip.cc
+	inffast.c
+	inflate.c
+	inftrees.c
+	ioapi.c
+	trees.c
+	unzip.c
+	zip.c
+	zutil.c 
+	;
+

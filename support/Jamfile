@@ -1,0 +1,68 @@
+SubDir P4 support ;
+
+SubDirHdrs $(P4) dbsupp ;
+SubDirHdrs $(P4) i18n ;
+SubDirC++Flags -I$(SSLINCDIR) ;
+
+if USE_OPENLDAP
+{
+        SubDirC++Flags
+                -I$(OPENLDAPINCDIR)
+                -I$(CYRUSSASLPINCDIR) ;
+}
+
+if $(OSPLAT) = X86_64 || $(OSPLAT) = X86 ||
+   $(OSPLAT) = X64 || ( $(OSPLAT) = IA64 && $(OS) != HPUX ) {
+	ObjectDefines [ FGristSourceFiles md5.o ] : MD5NOBUF ;
+	OPTIM on [ FGristSourceFiles md5.o ] += $(OPTIM) -O3 ;
+}
+
+P4Library $(SUPPORTLIB) :
+	bitarray.cc
+	datetime.cc
+	debug.cc
+	error.cc
+	errormsh.cc
+	errorsys.cc
+	handler.cc
+	hash.cc
+	ident.cc
+	ignore.cc
+	intarray.cc
+	jnlpos.cc
+	jnltrack.cc
+	mangle.cc
+	mapapi.cc
+	md5.cc
+	options.cc
+	progress.cc
+	random.cc
+	regmatch.cc
+	regexp.cc
+	spec.cc
+	specchar.cc
+	specdata.cc
+	specdef.cc
+	specparse.cc
+	splr.cc
+	strarray.cc
+	strbuf.cc
+	strdict.cc
+	strops.cc
+	strtable.cc
+	strxml.cc
+	ticket.cc
+	tracker.cc
+	uuid.cc
+	vararray.cc
+	varlist.cc
+	varqsort.cc ;
+
+Ident ident.cc ;
+
+DefineVar ident.cc : OPENSSL_VERSION_TEXT ;
+
+if $(OS) = AS400
+{
+	P4Library $(SUPPORTLIB) : ebcdic.cc ;
+}

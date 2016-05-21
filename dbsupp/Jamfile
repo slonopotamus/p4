@@ -1,0 +1,41 @@
+SubDir P4 dbsupp ;
+
+SubDirHdrs $(P4) i18n ;
+SubDirHdrs $(P4) db ;
+SubDirHdrs $(P4) dm ;
+
+P4DLibrary $(DMLIB) : 
+	license.cc
+	ldapconf.cc
+	qryparse.cc
+	wordlist.cc
+	viewgen.cc
+	;
+
+P4Library $(SUPPORTLIB) :
+	mapchar.cc
+	maphalf.cc
+	mapitem.cc
+	mapjoin.cc
+	mapstring.cc
+	maptable.cc
+	;
+
+# jam -sLICENSE=x to make license program
+# jam -sLICENSE=x -sLICENSING=foo to make license prgram that
+# can only gen licenses for 'foo' app.
+
+if $(LICENSE)
+{
+	P4Main license : licegen.cc ;
+	Ident licegen.cc : p4-license ;
+	DefineVar licegen.cc : LICENSING ;
+}
+
+LinkLibraries 
+	license
+	:
+	$(DMLIB)
+	$(SUPPORTLIB)
+	;
+

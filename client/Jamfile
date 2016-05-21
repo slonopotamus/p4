@@ -1,0 +1,47 @@
+SubDir P4 client ;
+
+SubDirHdrs $(P4) diff ;
+SubDirHdrs $(P4) rpc ;
+SubDirHdrs $(P4) net ;
+SubDirHdrs $(P4) i18n ;
+
+P4Main p4 : clientmain.cc ;
+Ident clientmain.cc client.cc clientinit.cc serverhelper.cc ;
+
+if $(OS) = NT
+{
+	WinRes p4.exe : p4.rc ;
+	WinResIdent p4.rc ;
+}
+
+LinkLibraries p4 :
+	$(CLIENTLIB)
+	$(RPCLIB)
+	$(SUPPORTLIB)
+	;
+
+P4Library $(CLIENTLIB) : 
+	client.cc
+	clientaliases.cc
+	clientapi.cc
+	clientenv.cc
+	clienti18n.cc
+	clientinit.cc
+	clientmerge.cc
+	clientmerge2.cc
+	clientmerge3.cc
+	clientprog.cc
+	clientrcvfiles.cc
+	clientreplicate.cc
+	clientresolvea.cc
+	clientservice.cc
+	clientservicer.cc
+	clienttrust.cc
+	clientuser.cc
+	clientuserdbg.cc
+	clientusermsh.cc
+	clientusernull.cc
+	serverhelper.cc
+	serverhelperapi.cc
+	;
+

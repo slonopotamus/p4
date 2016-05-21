@@ -1,0 +1,74 @@
+$Id: //depot/dev/ecosystem/p4_20161/POLICY#1 $ 
+$Author: llam $
+
+Policy document for //depot/*/p4 codelines.
+
+This document covers both //depot/main/p4 (mainline development) and
+//depot/r*/p4 (release lines).  This document is skeletal.
+
+For the complete release codeline policy, see the file POLICY located in each
+//depot/r*/POLICY.
+
+Mainline Development Policy owner: seiwald@perforce.com
+
+Codeline owners: 
+
+	//depot/main/p4
+
+		seiwald@perforce.com 
+
+	//depot/r*/p4
+
+		evalynne@perforce.com 
+
+
+Use policy:
+
+	//depot/main/p4
+
+		This line is for mainline development of the Perforce command
+		line client and server.  Release builds should never be made
+		from this line, though beta releases may be.
+
+		Only release and approved development branches may be made from
+		this codeline.
+
+	//depot/r*/p4
+
+		These lines are for production releases.  Customer builds can
+		be made from them.
+
+		Branches are not allowed from these codelines.
+
+Submission policy:
+
+	//depot/main/p4
+
+		Only a few developers are permitted to change this codeline.
+		If you have doubt that you are one, ask the owner.
+
+		See //depot/main/p4-doc/talks/coding.ppt for coding standards
+		and source code layout.
+
+		Don't create new directories without permission of the codeline
+		owner.
+
+		New file names must blend with existing ones.
+
+		All changes must pass the tests in //depot/main/p4-test/td/*
+		before being submitted.
+
+	//depot/r*/p4
+
+		Generally, only A bug fixes are permitted on released lines.
+
+		Generally, only porting engineers and developers are permitted
+		to change this codeline.
+
+		All changes must be approved by the codeline owner.
+
+		All changes must pass the tests in //depot/main/p4-test/td/*
+		before being submitted.
+
+		For the complete documentation for release codeline submission policy
+                see //depot/r*/POLICY
